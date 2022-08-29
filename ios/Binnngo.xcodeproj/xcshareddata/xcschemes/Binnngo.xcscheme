@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "bingo.app"
-               BlueprintName = "bingo"
-               ReferencedContainer = "container:bingo.xcodeproj">
+               BuildableName = "Binnngo.app"
+               BlueprintName = "Binnngo"
+               ReferencedContainer = "container:Binnngo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "bingoTests.xctest"
-               BlueprintName = "bingoTests"
-               ReferencedContainer = "container:bingo.xcodeproj">
+               BuildableName = "BinnngoTests.xctest"
+               BlueprintName = "BinnngoTests"
+               ReferencedContainer = "container:Binnngo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "bingo.app"
-            BlueprintName = "bingo"
-            ReferencedContainer = "container:bingo.xcodeproj">
+            BuildableName = "Binnngo.app"
+            BlueprintName = "Binnngo"
+            ReferencedContainer = "container:Binnngo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "bingo.app"
-            BlueprintName = "bingo"
-            ReferencedContainer = "container:bingo.xcodeproj">
+            BuildableName = "Binnngo.app"
+            BlueprintName = "Binnngo"
+            ReferencedContainer = "container:Binnngo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
