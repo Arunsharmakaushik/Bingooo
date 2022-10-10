@@ -9,273 +9,118 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-// import FileViewer from "react-native-file-viewer";
-// import RNHTMLtoPDF from 'react-native-html-to-pdf';
+
 
 
 const App = () => {
 
   const [mistakes, setMistakes] = useState(0)
+  const [press, setPress] = useState(0)
+  const [matrix, setMatrix] = useState(3)
 
-  const [array, setArray] = useState([
-    {
-      'val': 1,
-      "leftPos": null,
-      "topPos": null,
-      "rightPos": 1,
-      "downPos": 3,
-      "color": ''
-    },
-    {
-      'val': 2,
-      "leftPos": 0,
-      "topPos": null,
-      "rightPos": 2,
-      "downPos": 4,
-      "color": ''
-    },
-    {
-      'val': 3,
-      "leftPos": 1,
-      "topPos": null,
-      "rightPos": null,
-      "downPos": 5,
-      "color": ''
-    },
-    {
-      'val': 4,
-      "leftPos": null,
-      "topPos": 0,
-      "rightPos": 4,
-      "downPos": 6,
-      "color": ''
-    },
-    {
-      'val': 5,
-      "leftPos": 3,
-      "topPos": 1,
-      "rightPos": 5,
-      "downPos": 7,
-      "color": ''
-    },
-    {
-      'val': 6,
-      "leftPos": 4,
-      "topPos": 2,
-      "rightPos": null,
-      "downPos": 8,
-      "color": ''
-    },
-    {
-      'val': 7,
-      "leftPos": null,
-      "topPos": 3,
-      "rightPos": 7,
-      "downPos": null,
-      "color": ''
-    },
-    {
-      'val': 8,
-      "leftPos": 6,
-      "topPos": 4,
-      "rightPos": 8,
-      "downPos": null,
-      "color": ''
-    },
-    {
-      'val': 9,
-      "leftPos": 7,
-      "topPos": 5,
-      "rightPos": null,
-      "downPos": null,
-      "color": ''
-    }
-  ])
-  const [reset, setReset] = useState([
-    {
-      'val': 1,
-      "leftPos": null,
-      "topPos": null,
-      "rightPos": 1,
-      "downPos": 3,
-      "color": ''
-    },
-    {
-      'val': 2,
-      "leftPos": 0,
-      "topPos": null,
-      "rightPos": 2,
-      "downPos": 4,
-      "color": ''
-    },
-    {
-      'val': 3,
-      "leftPos": 1,
-      "topPos": null,
-      "rightPos": null,
-      "downPos": 5,
-      "color": ''
-    },
-    {
-      'val': 4,
-      "leftPos": null,
-      "topPos": 0,
-      "rightPos": 4,
-      "downPos": 6,
-      "color": ''
-    },
-    {
-      'val': 5,
-      "leftPos": 3,
-      "topPos": 1,
-      "rightPos": 5,
-      "downPos": 7,
-      "color": ''
-    },
-    {
-      'val': 6,
-      "leftPos": 4,
-      "topPos": 2,
-      "rightPos": null,
-      "downPos": 8,
-      "color": ''
-    },
-    {
-      'val': 7,
-      "leftPos": null,
-      "topPos": 3,
-      "rightPos": 7,
-      "downPos": null,
-      "color": ''
-    },
-    {
-      'val': 8,
-      "leftPos": 6,
-      "topPos": 4,
-      "rightPos": 8,
-      "downPos": null,
-      "color": ''
-    },
-    {
-      'val': 9,
-      "leftPos": 7,
-      "topPos": 5,
-      "rightPos": null,
-      "downPos": null,
-      "color": ''
-    }
-  ])
-  const [winningArray, setWinningArray] = useState([
-    {
-      'val': "9",
-      "leftPos": null,
-      "topPos": null,
-      "rightPos": 1,
-      "downPos": 3,
-      "color": ''
-    },
-    {
-      'val': "5",
-      "leftPos": 0,
-      "topPos": null,
-      "rightPos": 2,
-      "downPos": 4,
-      "color": ''
-    },
-    {
-      'val': "4",
-      "leftPos": 1,
-      "topPos": null,
-      "rightPos": null,
-      "downPos": 5,
-      "color": ''
-    },
-    {
-      'val': "8",
-      "leftPos": null,
-      "topPos": 0,
-      "rightPos": 4,
-      "downPos": 6,
-      "color": ''
-    },
-    {
-      'val': "3",
-      "leftPos": 3,
-      "topPos": 1,
-      "rightPos": 5,
-      "downPos": 7,
-      "color": ''
-    },
-    {
-      'val': "6",
-      "leftPos": 4,
-      "topPos": 2,
-      "rightPos": null,
-      "downPos": 8,
-      "color": ''
-    },
-    {
-      'val': "2",
-      "leftPos": null,
-      "topPos": 3,
-      "rightPos": 7,
-      "downPos": null,
-      "color": ''
-    },
-    {
-      'val': "7",
-      "leftPos": 6,
-      "topPos": 4,
-      "rightPos": 8,
-      "downPos": null,
-      "color": ''
-    },
-    {
-      'val': "1",
-      "leftPos": 7,
-      "topPos": 5,
-      "rightPos": null,
-      "downPos": null,
-      "color": ''
-    }
-  ])
-  const [enter, setEnter] = useState("5")
-  const [showLeft, setshowLeft] = useState(true)
-  const [showRight, setshowRight] = useState(true)
-  const [showUp, setshowUp] = useState(true)
-  const [showDown, setshowDown] = useState(true)
+  const [array, setArray] = useState([])
+  const [arrayUI, setArrayUI] = useState([]);
 
   useEffect(() => {
-    getColored(5)
-  }, [])
+    generateDynamicArray()
+    randomArray(matrix * matrix)
+  }, []);
+
+  useEffect(() => {
+    generateDynamicArray()
+    randomArray(matrix * matrix)
+  }, [matrix]);
+  function randomArray(n) {
+    let array = []
+    let totalNumber = []
+    for (let i = 0; i < n; i++) {
+      let randomnum = Math.floor(Math.random() * n + 1);
+      // let randomnum=Math.floor(Math.random() * (n - 1 + 1) + 1)
+      totalNumber.push(i + 1)
+      if (!(array.indexOf(randomnum) >= 0)) {
+        array.push(randomnum)
+      }
+
+      var remainValues = totalNumber.filter(x => array.indexOf(x) === -1)
+      remainValues.map((item, index) => {
+        array.push(item)
+      })
+
+    }
+    generateDynamicWinningArray(array)
+
+    console.log(JSON.stringify(array))
+  }
+  const generateDynamicWinningArray = (randomSmallArray) => {
+    let temp = [];
+    let numberOfTime = matrix * matrix;
+    for (let i = 0; i < numberOfTime; i++) {
+      temp.push({
+        val: String(randomSmallArray[i]),
+        leftPos: (i + 1 - 1 < 0 ? null : i % matrix === 0 ? null : i + 1 - 1) === null ? null : (i + 1 - 1 < 0 ? null : i % matrix === 0 ? null : i + 1 - 1) - 1,
+
+        topPos: (i + 1 - matrix <= 0 ? null : i + 1 - matrix) === null ? null : (i + 1 - matrix <= 0 ? null : i + 1 - matrix) - 1,
+        rightPos:
+          (i + 1 + 1 > matrix * matrix
+            ? null
+            : (i + 1) % matrix === 0
+              ? null
+              : i + 1 + 1) === null ? null : (i + 1 + 1 > matrix * matrix
+                ? null
+                : (i + 1) % matrix === 0
+                  ? null
+                  : i + 1 + 1) - 1,
+        downPos: (i + 1 + matrix > matrix * matrix ? null : i + 1 + matrix) === null ? null : (i + 1 + matrix > matrix * matrix ? null : i + 1 + matrix) - 1,
+        color: ""
+      });
+    }
+    console.log("jjjjj ", JSON.stringify(temp))
+    setWinningArray([...temp]);
+  }
+  const generateDynamicArray = () => {
+
+    let tempp = [];
+    for (let i = 0; i < matrix; i++) {
+      tempp.push([{}]);
+    }
+    setArrayUI([...tempp]);
+
+    let temp = [];
+    let numberOfTime = matrix * matrix;
+    for (let i = 0; i < numberOfTime; i++) {
+      temp.push({
+        val: String(i + 1),
+        leftPos: (i + 1 - 1 < 0 ? null : i % matrix === 0 ? null : i + 1 - 1) === null ? null : (i + 1 - 1 < 0 ? null : i % matrix === 0 ? null : i + 1 - 1) - 1,
+
+        topPos: (i + 1 - matrix <= 0 ? null : i + 1 - matrix) === null ? null : (i + 1 - matrix <= 0 ? null : i + 1 - matrix) - 1,
+        rightPos:
+          (i + 1 + 1 > matrix * matrix
+            ? null
+            : (i + 1) % matrix === 0
+              ? null
+              : i + 1 + 1) === null ? null : (i + 1 + 1 > matrix * matrix
+                ? null
+                : (i + 1) % matrix === 0
+                  ? null
+                  : i + 1 + 1) - 1,
+        downPos: (i + 1 + matrix > matrix * matrix ? null : i + 1 + matrix) === null ? null : (i + 1 + matrix > matrix * matrix ? null : i + 1 + matrix) - 1,
+        color: i + 1 === (parseInt(numberOfTime / 2)) + 1 ? "purple" : ""
+      });
+    }
+    console.log("jjjjj ", JSON.stringify(temp))
+    setArray([...temp]);
+  }
+  const [winningArray, setWinningArray] = useState([])
+  const [enter, setEnter] = useState(String((matrix * matrix) / 2 + 1))
+
   useEffect(() => {
     if (mistakes === 10) {
       alert('You are out')
-      setArray([...reset])
-      getColored(5)
+      generateDynamicArray()
+      randomArray(matrix * matrix)
       setMistakes(0)
-
     }
   }, [mistakes])
-  // const createPDF = async () => {
-  //   let options = {
-  //     html: '<h1>PDF TEST</h1>',
-  //     fileName: 'test',
-  //     directory: 'Documents',
-  //   };
-
-  //   let file = await RNHTMLtoPDF.convert(options)
-  //   // console.log(file.filePath);
-  //   console.log(file.filePath);
-  //   const path = FileViewer.open(file.filePath) // absolute-path-to-my-local-file.
-  //     .then(() => {
-  //       // success
-  //     })
-  //     .catch((error) => {
-  //       // error
-  //     });
-  //   console.log(path)
-  // }
 
 
   function Move(txt) {
@@ -286,7 +131,6 @@ const App = () => {
     let Val = null
 
     array.map((item, index) => {
-      console.log(item + " " + enter)
       if (item.val.toString() === enter.toString()) {
         if (txt === 'left') {
           if (item.leftPos !== null)
@@ -320,12 +164,10 @@ const App = () => {
       }
     })
     array.map((item, index) => {
-      console.log(item + " " + enter)
       if (index === Pos) {
         Val = item.val
       }
     })
-    console.log(Pos + "...... " + currentIndex + " " + Val)
     if (Pos !== null) {
       let data = array
       data[Pos].val = enter;
@@ -349,24 +191,75 @@ const App = () => {
         }
       })
       setArray([...data])
-      hideUnusedButtons(data, enter)
     }
-
-    console.log("winnin", JSON.stringify(winningArray))
-    console.log("simple", JSON.stringify(array))
-
-
-
-
 
 
     if (JSON.stringify(winningArray) === JSON.stringify(array)) {
-      alert("Won")
+      if (press < 10 && matrix===5) {
+        alert("Well DOne you won 10 rupee paytem Cash")
+
+      }
+      if (press < 15  && matrix===5) {
+        alert("Great Job , Well Done.....you are about to win 10 rupee cash")
+
+      }
+      if (press <= 30  && matrix===7) {
+        alert('good job')
+      }
+      if (press > 24  && matrix===7) {
+        alert('You won , Please try to be better')
+      }
+      if (press < 18 && matrix===7) {
+        alert("Well DOne you won 10 rupee paytem Cash")
+
+      }
+      if (press < 17  && matrix===7) {
+        alert("Great Job , Well Done.....you are about to win 10 rupee cash")
+
+      }
+      if (press <= 20  && matrix===5) {
+        alert('good job')
+      }
+      if (press > 20  && matrix===5) {
+        alert('You won , Please try to be better')
+      }
+      if (press < 3 && matrix===3) {
+        alert("Well DOne you won 10 rupee paytem Cash")
+
+      }
+      if (press < 5  && matrix===3) {
+        alert("Great Job , Well Done.....you are about to win 10 rupee cash")
+
+      }
+      if (press <= 8  && matrix===3) {
+        alert('good job')
+      }
+      if (press > 10  && matrix===3 ) {
+        alert('You won , Please try to be better')
+      }
+      if (press < 7 && matrix===4) {
+        alert("Well DOne you won 10 rupee paytem Cash")
+
+      }
+      if (press < 12  && matrix===4) {
+        alert("Great Job , Well Done.....you are about to win 10 rupee cash")
+
+      }
+      if (press <= 16  && matrix===4) {
+        alert('good job')
+      }
+      if (press > 16  && matrix===4 ) {
+        alert('You won , Please try to be better')
+      }
+     
+      generateDynamicArray()
+      randomArray(matrix * matrix)
+      setMistakes(0)
+      setPress(0)
     }
 
-
   }
-  const getColored = (text) => {
+  const getColored = (text, type) => {
     if (String(text).length > 0) {
       // alert(text.toString())
       setEnter(text.toString())
@@ -381,185 +274,110 @@ const App = () => {
           item.color = ''
         }
       })
-
-      hideUnusedButtons(data, text)
+      setPress(press + 1)
       setArray([...data])
     }
   }
-  const hideUnusedButtons = (data, text) => {
-    console.log("dsdsd ", data)
-    data.map((item) => {
-      if (item.val === text) {
-        setshowLeft(item.leftPos === null ? false : true)
-        setshowRight(item.rightPos === null ? false : true)
-        setshowUp(item.topPos === null ? false : true)
-        setshowDown(item.downPos === null ? false : true)
-      }
-    })
 
-  }
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
-      <View style={{ flexDirection: "row", width: "100%", alignItems: "center", justifyContent: 'center' }} >
-        <Text style={{ fontSize: 30, fontWeight: 'bold', color: "purple" }} >Level 1</Text>
-        <Text style={{ fontSize: 20, fontWeight: 'bold', position: "absolute", zIndex: 1, right: 20, color: "red" }} >Mistakes: {mistakes}</Text>
-      </View>
+    <ScrollView>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", marginVertical: 10 }} >
+        <View style={{ flexDirection: "row", flex: 1, marginTop: 10 }}  >
+          <TouchableOpacity onPress={() => setMatrix(3)} style={{ paddingHorizontal: 10, height: 40, justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 10 }}  >
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: "green" }}  >Level 1</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setMatrix(4)} style={{ paddingHorizontal: 10, marginHorizontal: 10, height: 40, justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 10 }}  >
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: "green" }}  >Level 2</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setMatrix(5)} style={{ paddingHorizontal: 10, height: 40, justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 10 }}  >
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: "green" }}  >Level 3</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setMatrix(7)} style={{ paddingHorizontal: 10, height: 40, justifyContent: "center", alignItems: "center", borderWidth: 1, borderRadius: 10 }}  >
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: "green" }}  >Level 4</Text>
+          </TouchableOpacity>
+        </View>
 
+        <View style={{ flexDirection: "row", width: "100%", marginBottom: 10, alignItems: "center", justifyContent: 'center' }} >
+          <Text style={{ fontSize: 20, fontWeight: 'bold', position: "absolute", zIndex: 1, left: 20, color: "red" }} >Press: {press}</Text>
+          <Text style={{ fontSize: 30, fontWeight: 'bold', color: "purple" }} >Level {matrix == 3 ? "1" : matrix == 4 ? "2" :matrix == 5? "3":"4"}</Text>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', position: "absolute", zIndex: 1, right: 20, color: "red" }} >Mistakes: {mistakes}</Text>
+        </View>
+        {arrayUI.map((item, index) => {
+          return (
+            <View style={{ flexDirection: "row" }} >
 
-      <View style={{ flexDirection: "row", marginTop: 20 }} >
+              {
+                array.slice(matrix * index, matrix * (index + 1)).map((item, index) => {
+                  return (
+                    <>
+                      <TouchableOpacity onPress={() => getColored(item.val, "new")} style={{ borderColor: "purple", backgroundColor: item.color ? item.color : 'transparent', height: 200 / matrix, width: 200 / matrix, borderRadius: 10, borderWidth: 1, justifyContent: 'center', alignItems: "center" }} >
+                        <Text style={{ fontSize: 100 / matrix, fontWeight: 'bold', color: item.color ? "white" : "black" }} >{item.val}</Text>
+                      </TouchableOpacity>
+                    </>
 
-        {
-          array.slice(0, 3).map((item, index) => {
-            return (
-              <>
-                <TouchableOpacity onPress={() => getColored(item.val)} style={{ borderColor: "purple", backgroundColor: item.color ? item.color : 'transparent', height: 60, width: 60, borderRadius: 10, borderWidth: 1, justifyContent: 'center', alignItems: "center" }} >
-                  <Text style={{ fontSize: 20, fontWeight: 'bold', color: item.color ? "white" : "black" }} >{item.val}</Text>
-                </TouchableOpacity>
-                {/* <Text>{'\n'} </Text> */}
-              </>
+                  )
+                })
+              }
 
-            )
-          })
-        }
-
-      </View>
-      <View style={{ flexDirection: "row" }} >
-
-        {
-          array.slice(3, 6).map((item, index) => {
-            return (
-              <>
-                <TouchableOpacity onPress={() => getColored(item.val)} style={{ borderColor: "purple", backgroundColor: item.color ? item.color : 'transparent', height: 60, width: 60, borderRadius: 10, borderWidth: 1, justifyContent: 'center', alignItems: "center" }} >
-                  <Text style={{ fontSize: 20, fontWeight: 'bold', color: item.color ? "white" : "black" }} >{item.val}</Text>
-                </TouchableOpacity>
-                {/* <Text>{'\n'} </Text> */}
-              </>
-
-            )
-          })
-        }
-
-      </View>
-      <View style={{ flexDirection: "row" }} >
-
-        {
-          array.slice(6, 9).map((item, index) => {
-            return (
-              <>
-                <TouchableOpacity onPress={() => getColored(item.val)} style={{ borderColor: "purple", backgroundColor: item.color ? item.color : 'transparent', height: 60, width: 60, borderRadius: 10, borderWidth: 1, justifyContent: 'center', alignItems: "center" }} >
-                  <Text style={{ fontSize: 20, fontWeight: 'bold', color: item.color ? "white" : "black" }} >{item.val}</Text>
-                </TouchableOpacity>
-                {/* <Text>{'\n'} </Text> */}
-              </>
-
-            )
-          })
-        }
-
-      </View>
-
-
-
-      {/* <TextInput
-        value={enter}
-        style={{ borderBottomWidth: 1, width: '90%', marginVertical: 20 }}
-        placeholder={'Enter number'}
-        onChangeText={(text) => {
-          getColored(text)
-        }}
-      /> */}
-      {
-        enter !== null ?
-          <View style={{ flexDirection: "row", margin: 30, width: "100%", justifyContent: "space-evenly" }} >
-
-            {
-              // showLeft &&
-              <TouchableOpacity onPress={() => Move('left')} style={{ borderColor: 'purple', borderWidth: 4, width: "20%", height: 50, borderRadius: 20, justifyContent: "center", alignItems: "center" }} >
-                <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }} >Left</Text>
-              </TouchableOpacity>
-
-            }
-            {
-              // showRight &&
-              <TouchableOpacity onPress={() => Move('Right')} style={{ borderColor: 'purple', borderWidth: 4, width: "20%", height: 50, borderRadius: 20, justifyContent: "center", alignItems: "center" }}  >
-                <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }} >Right</Text>
-              </TouchableOpacity>
-            }
-            {
-              // showUp &&
-              <TouchableOpacity onPress={() => Move('Up')} style={{ borderColor: 'purple', borderWidth: 4, width: "20%", height: 50, borderRadius: 20, justifyContent: "center", alignItems: "center" }}  >
-                <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }} >Up</Text>
-              </TouchableOpacity>
-            }
-            {
-              // showDown &&
-              <TouchableOpacity onPress={() => Move('Down')} style={{ borderColor: 'purple', borderWidth: 4, width: "20%", height: 50, borderRadius: 20, justifyContent: "center", alignItems: "center" }}  >
-                <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }} >Down</Text>
-              </TouchableOpacity>
-            }
-
-            {/* <TouchableOpacity onPress={() => createPDF()} style={{ borderWidth: 1, width: 60, height: 30, justifyContent: "center", alignItems: "center" }} >
-              <Text>Upload</Text>
-            </TouchableOpacity> */}
-          </View>
-
-          : null
-
-      }
-      <Text style={{ fontSize: 30, fontWeight: 'bold', color: "purple" }} >Match this Puzzle</Text>
-
-      <View style={{ flexDirection: "row", marginTop: 20 }} >
+            </View>
+          );
+        })}
 
         {
-          winningArray.slice(0, 3).map((item, index) => {
-            return (
-              <>
-                <TouchableOpacity onPress={() => getColored(item.val)} style={{ borderColor: "purple", backgroundColor: 'transparent', height: 60, width: 60, borderRadius: 10, borderWidth: 1, justifyContent: 'center', alignItems: "center" }} >
-                  <Text style={{ fontSize: 20, fontWeight: 'bold', color: "black" }} >{item.val}</Text>
+          enter !== null ?
+            <View style={{ flexDirection: "row", margin: 30, width: "100%", justifyContent: "space-evenly" }} >
+
+              {
+                <TouchableOpacity onPress={() => Move('left')} style={{ borderColor: 'purple', borderWidth: 4, width: "20%", height: 50, borderRadius: 20, justifyContent: "center", alignItems: "center" }} >
+                  <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }} >Left</Text>
                 </TouchableOpacity>
-                {/* <Text>{'\n'} </Text> */}
-              </>
 
-            )
-          })
-        }
-
-      </View>
-      <View style={{ flexDirection: "row" }} >
-
-        {
-          winningArray.slice(3, 6).map((item, index) => {
-            return (
-              <>
-                <TouchableOpacity onPress={() => getColored(item.val)} style={{ borderColor: "purple", backgroundColor: 'transparent', height: 60, width: 60, borderRadius: 10, borderWidth: 1, justifyContent: 'center', alignItems: "center" }} >
-                  <Text style={{ fontSize: 20, fontWeight: 'bold', color: "black" }} >{item.val}</Text>
+              }
+              {
+                <TouchableOpacity onPress={() => Move('Right')} style={{ borderColor: 'purple', borderWidth: 4, width: "20%", height: 50, borderRadius: 20, justifyContent: "center", alignItems: "center" }}  >
+                  <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }} >Right</Text>
                 </TouchableOpacity>
-                {/* <Text>{'\n'} </Text> */}
-              </>
-
-            )
-          })
-        }
-
-      </View>
-      <View style={{ flexDirection: "row" }} >
-
-        {
-          winningArray.slice(6, 9).map((item, index) => {
-            return (
-              <>
-                <TouchableOpacity onPress={() => getColored(item.val)} style={{ borderColor: "purple", backgroundColor: 'transparent', height: 60, width: 60, borderRadius: 10, borderWidth: 1, justifyContent: 'center', alignItems: "center" }} >
-                  <Text style={{ fontSize: 20, fontWeight: 'bold', color: "black" }} >{item.val}</Text>
+              }
+              {
+                <TouchableOpacity onPress={() => Move('Up')} style={{ borderColor: 'purple', borderWidth: 4, width: "20%", height: 50, borderRadius: 20, justifyContent: "center", alignItems: "center" }}  >
+                  <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }} >Up</Text>
                 </TouchableOpacity>
-                {/* <Text>{'\n'} </Text> */}
-              </>
+              }
+              {
+                <TouchableOpacity onPress={() => Move('Down')} style={{ borderColor: 'purple', borderWidth: 4, width: "20%", height: 50, borderRadius: 20, justifyContent: "center", alignItems: "center" }}  >
+                  <Text style={{ color: "black", fontSize: 18, fontWeight: "bold" }} >Down</Text>
+                </TouchableOpacity>
+              }
+            </View>
 
-            )
-          })
+            : null
+
         }
+        <Text style={{ fontSize: 30, fontWeight: 'bold', color: "purple", marginVertical: 20 }} >Match this Puzzle</Text>
+        {arrayUI.map((item, index) => {
+          return (
+            <View style={{ flexDirection: "row" }} >
 
+              {
+                winningArray.slice(matrix * index, matrix * (index + 1)).map((item, index) => {
+                  return (
+                    <>
+                      <TouchableOpacity onPress={() => getColored(item.val, "new")} style={{ borderColor: "purple", backgroundColor: 'transparent', height: 200 / matrix, width: 200 / matrix, borderRadius: 10, borderWidth: 1, justifyContent: 'center', alignItems: "center" }} >
+                        <Text style={{ fontSize: 100 / matrix, fontWeight: 'bold', color: "black" }} >{item.val}</Text>
+                      </TouchableOpacity>
+                    </>
+
+                  )
+                })
+              }
+
+            </View>
+          );
+        })}
       </View>
-    </SafeAreaView>
+
+    </ScrollView>
+
   );
 };
 
