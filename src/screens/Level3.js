@@ -3,6 +3,7 @@ import React from 'react'
 import Header from '../components/Header';
 const Level3 = ({ navigation, route }) => {
     const { name } = route?.params;
+    console.log("OPOP")
     return (
         <View style={{ flex: 1 }} >
             <Header showMessage={() => alert("About this Level")} name={name} navigation={navigation} />
