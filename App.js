@@ -11,7 +11,7 @@ const App = ({ navigation }) => {
       name: "Level 2", onClickLevel: () => navigation.navigate("Level2", { name: "Level 2" }), lock: true
     },
     {
-      name: "Level 3", onClickLevel: () => navigation.navigate("Level3", { name: "Level 3" }), lock: true
+      name: "Level 3", onClickLevel: () => navigation.navigate("Level3", { name: "Level 3" }), lock: false
     },
     {
       name: "Level 4", onClickLevel: () => navigation.navigate("Level4", { name: "Level 4" }), lock: true
